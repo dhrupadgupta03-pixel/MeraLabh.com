@@ -1,0 +1,35 @@
+:root {
+  --bg: #f5f8fc;
+  --surface: #ffffff;
+  --surface-soft: #eef4ff;
+  --surface-tint: color-mix(in oklab, var(--surface), var(--bg) 12%);
+  --surface-elevated: color-mix(in oklab, var(--surface), transparent 6%);
+  --fg: #1f2937;
+  --fg-2: #4b5563;
+  --muted: #6b7280;
+  --accent: #1a73e8;
+  --accent-strong: #155fc1;
+  --accent-soft: rgba(26, 115, 232, 0.12);
+  --success: #188038;
+  --success-soft: rgba(24, 128, 56, 0.06);
+  --danger: #d93025;
+  --danger-soft: rgba(217, 48, 37, 0.06);
+  --border: #d7dde8;
+  --border-soft: #e7ebf1;
+  --shadow: 0 18px 44px rgba(31, 41, 55, 0.1);
+  --shadow-card: 0 10px 26px rgba(31, 41, 55, 0.06);
+  --radius-sm: 12px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-shell: 28px;
+  --radius-pill: 999px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --font: Inter, system-ui, sans-serif;
+  --display: "Google Sans", Inter, system-ui, sans-serif;
+}
