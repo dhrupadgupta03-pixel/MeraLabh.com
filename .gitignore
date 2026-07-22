@@ -1,5 +1,5 @@
 # build output
-dist/
+# dist/ is intentionally tracked for Cloudflare's no-build deploy flow.
 
 # generated types
 .astro/
