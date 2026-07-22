@@ -1,0 +1,20 @@
+---
+import SeoLayout from '../layouts/SeoLayout.astro';
+---
+<SeoLayout
+  title="Page Not Found | MeraLabh"
+  description="This page is no longer available. Use the current Ayushman eligibility guide or the online checker."
+  noindex={true}
+>
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-tag">Page removed</div>
+      <h1 class="hero-title">This page is no longer available</h1>
+      <p class="hero-description">We retired older pages from the site. You can continue with the latest eligibility guide or use the online checker below.</p>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem;">
+        <a href="/" class="btn btn-primary">Open Eligibility Guide</a>
+        <a href="/check/" class="btn btn-secondary">Open Eligibility Checker</a>
+      </div>
+    </div>
+  </section>
+</SeoLayout>

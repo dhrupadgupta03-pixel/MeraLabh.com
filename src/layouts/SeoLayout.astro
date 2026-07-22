@@ -1,0 +1,119 @@
+---
+import '../styles/eligibility.css';
+
+interface Props {
+  title: string;
+  description: string;
+  schemaMarkup?: string;
+  breadcrumbListSchema?: string;
+  canonicalUrl?: string;
+  activeNav?: 'home' | 'check';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  schemaMarkup,
+  breadcrumbListSchema,
+  canonicalUrl,
+  activeNav,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() ?? 'https://www.meralabh.com';
+const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).toString();
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'}>
+  <link rel="canonical" href={resolvedCanonicalUrl}>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
+  <meta name="theme-color" content="#0e4ea2">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={resolvedCanonicalUrl}>
+  <meta property="og:site_name" content="MeraLabh">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+
+  {schemaMarkup && (
+    <script type="application/ld+json" set:html={schemaMarkup} />
+  )}
+  {breadcrumbListSchema && (
+    <script type="application/ld+json" set:html={breadcrumbListSchema} />
+  )}
+</head>
+<body>
+  <header class="ml-header" id="header">
+    <div class="ml-header-container">
+      <a href="/" class="ml-logo">
+        <span>MeraLabh</span><span class="ml-logo-dot">.</span>
+      </a>
+      <nav>
+        <ul class="ml-nav">
+          <li class="ml-nav-item ml-nav-item-primary"><a href="/" class:list={['ml-nav-link', activeNav === 'home' && 'active']}>Scheme Eligibility</a></li>
+          <li><a href="/check/" class:list={['ml-nav-link', activeNav === 'check' && 'active']}>Online Check</a></li>
+          <li><a href="/check/" class="ml-header-cta">Check Eligibility</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="ml-footer" id="footer">
+    <div class="ml-footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="ml-logo">
+            <span>MeraLabh</span><span class="ml-logo-dot">.</span>
+          </a>
+          <p class="footer-desc">MeraLabh is a public-facing information portal that simplifies Indian government scheme rules to help everyday citizens understand their benefits.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="/">Eligibility Guide</a></li>
+            <li class="footer-link"><a href="/check/">Eligibility Tool</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Other Schemes</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Jan Dhan Yojana</a></li>
+            <li class="footer-link"><a href="#">PM Kisan Eligibility</a></li>
+            <li class="footer-link"><a href="#">ABHA Card Registration</a></li>
+            <li class="footer-link"><a href="#">Awas Yojana Rules</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Official Support</h4>
+          <div class="footer-helpdesk">
+            <p class="footer-helpdesk-text">Official PM-JAY national helpline operates 24/7 for beneficiary queries:</p>
+            <a href="tel:14555" class="footer-phone">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              14555
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-disclaimer"><strong>Disclaimer:</strong> MeraLabh is an independent informational website and is not affiliated with the National Health Authority, the Ministry of Health and Family Welfare, or any state or central government. The official portal is located at pmjay.gov.in.</p>
+        <p class="footer-copyright">© 2026 MeraLabh.com. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
