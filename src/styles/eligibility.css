@@ -675,8 +675,29 @@ a:hover {
 }
 
 .radio-card-bottom-icon .radio-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  width: 100%;
+  max-width: 250px;
   padding-left: 3.2rem;
   padding-right: 0.2rem;
+}
+
+.radio-card-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.radio-card-desc {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--text-primary);
 }
 
 .radio-card-icon-bottom {
@@ -684,7 +705,7 @@ a:hover {
   width: calc(100% + 2rem);
   max-width: none;
   height: 55px;
-  margin-top: 0;
+  margin-top: -5px;
   margin-left: -1rem;
   margin-right: -1rem;
   margin-bottom: -1rem;

@@ -1,0 +1,509 @@
+---
+import SeoLayout from '../layouts/SeoLayout.astro';
+
+const canonicalUrl = new URL('/check/', Astro.site || 'https://www.meralabh.com').toString();
+const pageSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Ayushman Card Eligibility Calculator Online - Check PM-JAY Status',
+  description:
+    'Use our interactive Ayushman Bharat eligibility check tool online. Get instant results based on rural, urban, and exclusion criteria.',
+  applicationCategory: 'GovernmentApplication',
+  operatingSystem: 'Web',
+  url: canonicalUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: 'MeraLabh',
+    url: 'https://www.meralabh.com/',
+  },
+});
+
+const breadcrumbListSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.meralabh.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Online Check',
+      item: canonicalUrl,
+    },
+  ],
+});
+---
+<SeoLayout
+  title="Ayushman Card Eligibility Calculator Online - Check PM-JAY Status"
+  description="Use our interactive Ayushman Bharat eligibility check tool online. Get instant results based on rural, urban, and exclusion criteria."
+  canonicalUrl={canonicalUrl}
+  schemaMarkup={pageSchema}
+  breadcrumbListSchema={breadcrumbListSchema}
+  activeNav="check"
+>
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">PM-JAY Eligibility Check Tool</h1>
+      <p class="hero-description">Answer a few simple questions about your household, income, and lifestyle to pre-evaluate your PMJAY Ayushman Card eligibility.</p>
+    </div>
+  </section>
+
+  <div class="tool-container">
+    <div class="wizard-card">
+      <div class="wizard-progress-bar-container">
+        <div class="wizard-progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="wizard-header">
+        <h3 id="wizardStepTitle">Household Location</h3>
+        <span class="step-indicator" id="stepIndicator">Step 1 of 3</span>
+      </div>
+
+      <div class="wizard-step active" id="step1">
+        <div class="form-group">
+          <label class="form-label" for="stateSelect">Select Your State</label>
+          <select class="select-input" id="stateSelect">
+            <option value="" disabled selected>-- Choose State --</option>
+            <option value="UP">Uttar Pradesh</option>
+            <option value="BI">Bihar</option>
+            <option value="MP">Madhya Pradesh</option>
+            <option value="MH">Maharashtra</option>
+            <option value="WB">West Bengal</option>
+            <option value="RJ">Rajasthan</option>
+            <option value="TN">Tamil Nadu</option>
+            <option value="KA">Karnataka</option>
+            <option value="GU">Gujarat</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="OTHER">Other State / UT</option>
+          </select>
+          <div id="stateSelectError" style="display: none; margin-top: 0.55rem; color: #dc2626; font-size: 0.85rem; font-weight: 500;">
+            Select the state first before moving to the next step.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Where is your household located?</label>
+          <div class="radio-group">
+            <div class="radio-card radio-card-bottom-icon selected" id="cardRural" onclick="selectLocation('rural')">
+              <input type="radio" name="locationType" id="radioRural" value="rural" checked>
+              <span class="radio-card-control" aria-hidden="true"></span>
+              <div class="radio-card-content">
+                <span class="radio-card-title">Rural Areas</span>
+                <span class="radio-card-desc">Villages, Gram Panchayats, agricultural zones.</span>
+              </div>
+              <img
+                src="/check/assets/rural-card-scene.png"
+                alt="Rural landscape illustration"
+                class="radio-card-icon radio-card-icon-bottom"
+              >
+            </div>
+            <div class="radio-card radio-card-bottom-icon" id="cardUrban" onclick="selectLocation('urban')">
+              <input type="radio" name="locationType" id="radioUrban" value="urban">
+              <span class="radio-card-control" aria-hidden="true"></span>
+              <div class="radio-card-content">
+                <span class="radio-card-title">Urban Areas</span>
+                <span class="radio-card-desc">Cities, municipalities, towns, cantonments.</span>
+              </div>
+              <img
+                src="/check/assets/urban-card-scene.png"
+                alt="Urban landscape illustration"
+                class="radio-card-icon radio-card-icon-bottom"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="step2">
+        <div id="ruralQuestions" style="display: none;">
+          <label class="form-label rural-questions-label">Select if any of the following apply to your household:</label>
+
+          <label class="form-group checkbox-card" for="depD1">
+            <input type="checkbox" id="depD1">
+            <span class="checkbox-card-content">
+              <strong class="checkbox-card-title">Temporary House (D1)</strong>
+              <span class="checkbox-card-desc">Household lives in a house with only one room with kucha walls and roof.</span>
+            </span>
+          </label>
+
+          <label class="form-group checkbox-card" for="depD2">
+            <input type="checkbox" id="depD2">
+            <span class="checkbox-card-content">
+              <strong class="checkbox-card-title">No Adult Caregivers (D2)</strong>
+              <span class="checkbox-card-desc">Household has no adult member between the ages of 16 and 59.</span>
+            </span>
+          </label>
+
+          <label class="form-group checkbox-card" for="depD4">
+            <input type="checkbox" id="depD4">
+            <span class="checkbox-card-content">
+              <strong class="checkbox-card-title">Disabled Household (D4)</strong>
+              <span class="checkbox-card-desc">Household has a disabled member and no able-bodied adult member.</span>
+            </span>
+          </label>
+
+          <label class="form-group checkbox-card" for="depD7">
+            <input type="checkbox" id="depD7">
+            <span class="checkbox-card-content">
+              <strong class="checkbox-card-title">Landless Casual Labor (D7)</strong>
+              <span class="checkbox-card-desc">Household is landless and earns a major part of its income from manual casual labor.</span>
+            </span>
+          </label>
+        </div>
+
+        <div id="urbanQuestions" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="urbanJobSelect">Select Main Occupation of the Household Breadwinner</label>
+            <select class="select-input" id="urbanJobSelect">
+              <option value="" disabled selected>-- Select Occupation --</option>
+              <option value="ragpicker">Ragpicker, Street Sweeper, Sanitation worker</option>
+              <option value="helper">Domestic helper, Cook, Home helper</option>
+              <option value="vendor">Street vendor, Hawker, Vegetable seller, Cobbler</option>
+              <option value="labor">Construction worker, Plumber, Mason, Painter</option>
+              <option value="artisan">Weaver, Handicraft worker, Home tailor</option>
+              <option value="transport">Driver, Conductor, Cart/Rickshaw puller</option>
+              <option value="shop">Delivery boy, Shop helper, Waiter, Peon</option>
+              <option value="other_formal">Formal employee, Salaried professional, Store owner</option>
+              <option value="none">Unemployed, Homemaker</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="step3">
+        <label class="form-label" style="margin-bottom: 1.2rem; color: var(--accent-orange);">Check all features owned by your household (Strict Exclusions):</label>
+
+        <label class="form-group checkbox-card" for="exVehicle">
+          <input type="checkbox" id="exVehicle">
+          <span class="checkbox-card-content">
+            <strong class="checkbox-card-title">Motorized Vehicles</strong>
+            <span class="checkbox-card-desc">Household owns a motorized two-wheeler, three-wheeler, four-wheeler, or commercial vehicle.</span>
+          </span>
+        </label>
+
+        <label class="form-group checkbox-card" for="exGovernment">
+          <input type="checkbox" id="exGovernment">
+          <span class="checkbox-card-content">
+            <strong class="checkbox-card-title">Government Employee</strong>
+            <span class="checkbox-card-desc">Any member of the household is a regular or permanent government employee.</span>
+          </span>
+        </label>
+
+        <label class="form-group checkbox-card" for="exTax">
+          <input type="checkbox" id="exTax">
+          <span class="checkbox-card-content">
+            <strong class="checkbox-card-title">Income Tax Payer</strong>
+            <span class="checkbox-card-desc">Any family member is registered as an income tax payer or pays professional tax.</span>
+          </span>
+        </label>
+
+        <label class="form-group checkbox-card" for="exLand">
+          <input type="checkbox" id="exLand">
+          <span class="checkbox-card-content">
+            <strong class="checkbox-card-title">High Landholding</strong>
+            <span class="checkbox-card-desc">Owns more than 5 acres of irrigated land or holds a KCC above Rs 50,000.</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="wizard-step" id="stepResult">
+        <div class="results-card">
+          <div id="resultStatusBadge" class="results-badge">ELIGIBLE</div>
+          <h2 class="results-title" id="resultTitle">You are eligible!</h2>
+          <p class="results-description" id="resultDesc">Based on your inputs, your household meets the criteria for PMJAY health card coverage.</p>
+
+          <div class="results-reasons">
+            <h4 class="results-reasons-title" id="reasonsHeader">Evaluation Breakdown:</h4>
+            <ul class="results-reasons-list" id="reasonsList"></ul>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="/" class="btn btn-secondary">Read Full Rules</a>
+            <a href="javascript:void(0)" onclick="resetWizard()" class="btn btn-primary">Check Again</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-footer" id="wizardFooter">
+        <button class="btn btn-secondary" id="btnPrev" disabled>Previous</button>
+        <button class="btn btn-primary" id="btnNext">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="main-wrapper" style="margin-top: 4rem;">
+    <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center;">PM-JAY Scheme Parameters Matrix</h2>
+    <div class="eligibility-table-wrapper" style="max-width: 800px; margin: 0 auto;">
+      <table class="eligibility-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Rural Rules</th>
+            <th>Urban Rules</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Focus Area</strong></td>
+            <td>Socio-economic deprivation categories.</td>
+            <td>Informal and unorganized occupational profiles.</td>
+          </tr>
+          <tr>
+            <td><strong>Primary Target</strong></td>
+            <td>Landless laborers, kucha house occupants, women-led or disabled households.</td>
+            <td>Daily wage workers, domestic helpers, street hawkers.</td>
+          </tr>
+          <tr>
+            <td><strong>Key Exclusion</strong></td>
+            <td>Owns motorized vehicles, pays tax, regular government job.</td>
+            <td>Formal salaried employment, pays tax, high-value land or assets.</td>
+          </tr>
+          <tr>
+            <td><strong>Benefits</strong></td>
+            <td colspan="2" style="text-align: center; background-color: #fafafa; font-weight: 600; color: var(--primary-blue);">Rs 5 lakh annual cashless treatment at any empaneled hospital.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <script is:inline>
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    const progressBar = document.getElementById('progressBar');
+    const stepIndicator = document.getElementById('stepIndicator');
+    const wizardStepTitle = document.getElementById('wizardStepTitle');
+    const btnNext = document.getElementById('btnNext');
+    const btnPrev = document.getElementById('btnPrev');
+    const wizardFooter = document.getElementById('wizardFooter');
+    const stateSelectError = document.getElementById('stateSelectError');
+    const cardRural = document.getElementById('cardRural');
+    const cardUrban = document.getElementById('cardUrban');
+    const radioRural = document.getElementById('radioRural');
+    const radioUrban = document.getElementById('radioUrban');
+
+    let locationType = 'rural';
+
+    function selectLocation(type) {
+      locationType = type;
+      cardRural?.classList.remove('selected');
+      cardUrban?.classList.remove('selected');
+      if (radioRural) radioRural.checked = false;
+      if (radioUrban) radioUrban.checked = false;
+
+      if (type === 'rural') {
+        cardRural?.classList.add('selected');
+        if (radioRural) radioRural.checked = true;
+      } else {
+        cardUrban?.classList.add('selected');
+        if (radioUrban) radioUrban.checked = true;
+      }
+      validateStep();
+    }
+
+    function showStateError() {
+      if (stateSelectError) {
+        stateSelectError.style.display = 'block';
+      }
+    }
+
+    function hideStateError() {
+      if (stateSelectError) {
+        stateSelectError.style.display = 'none';
+      }
+    }
+
+    function validateStep() {
+      if (currentStep === 1) {
+        const stateSelect = document.getElementById('stateSelect');
+        btnNext.disabled = false;
+        if (stateSelect instanceof HTMLSelectElement && stateSelect.value !== '') {
+          hideStateError();
+        }
+      } else if (currentStep === 2) {
+        if (locationType === 'urban') {
+          const urbanJobSelect = document.getElementById('urbanJobSelect');
+          btnNext.disabled = !(urbanJobSelect instanceof HTMLSelectElement && urbanJobSelect.value !== '');
+        } else {
+          btnNext.disabled = false;
+        }
+      } else {
+        btnNext.disabled = false;
+      }
+    }
+
+    document.getElementById('stateSelect')?.addEventListener('change', validateStep);
+    document.getElementById('urbanJobSelect')?.addEventListener('change', validateStep);
+    btnNext?.addEventListener('click', () => navigateStep(1));
+    btnPrev?.addEventListener('click', () => navigateStep(-1));
+
+    function navigateStep(direction) {
+      if (direction === 1 && currentStep === 1) {
+        const stateSelect = document.getElementById('stateSelect');
+        if (stateSelect instanceof HTMLSelectElement && stateSelect.value === '') {
+          showStateError();
+          return;
+        }
+      }
+
+      document.getElementById(`step${currentStep}`)?.classList.remove('active');
+      currentStep += direction;
+
+      if (currentStep === 2) {
+        if (locationType === 'rural') {
+          document.getElementById('ruralQuestions').style.display = 'block';
+          document.getElementById('urbanQuestions').style.display = 'none';
+        } else {
+          document.getElementById('ruralQuestions').style.display = 'none';
+          document.getElementById('urbanQuestions').style.display = 'block';
+        }
+      }
+
+      if (currentStep <= totalSteps) {
+        document.getElementById(`step${currentStep}`)?.classList.add('active');
+        updateWizardUI();
+      } else {
+        evaluateResults();
+      }
+    }
+
+    function updateWizardUI() {
+      const progressPercent = (currentStep / totalSteps) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      stepIndicator.innerText = `Step ${currentStep} of ${totalSteps}`;
+
+      if (currentStep === 1) {
+        wizardStepTitle.innerText = 'Household Location';
+        btnPrev.disabled = true;
+        btnNext.innerText = 'Next';
+      } else if (currentStep === 2) {
+        wizardStepTitle.innerText = locationType === 'rural' ? 'Rural Deprivations' : 'Urban Occupations';
+        btnPrev.disabled = false;
+        btnNext.innerText = 'Next';
+      } else if (currentStep === 3) {
+        wizardStepTitle.innerText = 'Exclusions Checklist';
+        btnPrev.disabled = false;
+        btnNext.innerText = 'Submit';
+      }
+      validateStep();
+    }
+
+    function evaluateResults() {
+      wizardFooter.style.display = 'none';
+      wizardStepTitle.innerText = 'Result Dashboard';
+      stepIndicator.style.display = 'none';
+      progressBar.style.width = '100%';
+
+      const exVehicle = document.getElementById('exVehicle').checked;
+      const exGovernment = document.getElementById('exGovernment').checked;
+      const exTax = document.getElementById('exTax').checked;
+      const exLand = document.getElementById('exLand').checked;
+      const hasExclusions = exVehicle || exGovernment || exTax || exLand;
+
+      let criteriaMet = false;
+      let reasonListHTML = '';
+
+      if (locationType === 'rural') {
+        const depD1 = document.getElementById('depD1').checked;
+        const depD2 = document.getElementById('depD2').checked;
+        const depD4 = document.getElementById('depD4').checked;
+        const depD7 = document.getElementById('depD7').checked;
+
+        if (depD1 || depD2 || depD4 || depD7) {
+          criteriaMet = true;
+          if (depD1) reasonListHTML += '<li>Family satisfies deprivation criteria D1 (kucha temporary wall and roof).</li>';
+          if (depD2) reasonListHTML += '<li>Family satisfies deprivation criteria D2 (no adult between 16 and 59).</li>';
+          if (depD4) reasonListHTML += '<li>Family satisfies deprivation criteria D4 (disabled member present).</li>';
+          if (depD7) reasonListHTML += '<li>Family satisfies deprivation criteria D7 (landless casual labor).</li>';
+        } else {
+          reasonListHTML += '<li>No rural deprivation parameters were checked.</li>';
+        }
+      } else {
+        const job = document.getElementById('urbanJobSelect').value;
+        if (job !== 'other_formal' && job !== 'none') {
+          criteriaMet = true;
+          reasonListHTML += `<li>Household breadwinner falls under the eligible informal job category: <strong>${job.toUpperCase()}</strong>.</li>`;
+        } else if (job === 'other_formal') {
+          reasonListHTML += '<li>Formal corporate jobs and salaried professionals are not eligible for PMJAY.</li>';
+        } else {
+          reasonListHTML += '<li>Unemployed households without informal occupational profiles do not meet urban eligibility.</li>';
+        }
+      }
+
+      const badge = document.getElementById('resultStatusBadge');
+      const title = document.getElementById('resultTitle');
+      const desc = document.getElementById('resultDesc');
+      const list = document.getElementById('reasonsList');
+
+      if (!badge || !title || !desc || !list) {
+        return;
+      }
+
+      if (hasExclusions) {
+        badge.innerText = 'NOT ELIGIBLE';
+        badge.className = 'results-badge excluded';
+        title.innerText = 'Exclusion Parameters Met';
+        desc.innerText = 'Unfortunately, your household has assets or conditions that legally disqualify you from the Ayushman Bharat PM-JAY scheme.';
+
+        let exclusionDetails = '<li>Household owns assets or has family conditions that exclude eligibility:</li>';
+        if (exVehicle) exclusionDetails += '<li><strong>Ownership of motorized vehicle(s)</strong> triggers exclusion rules.</li>';
+        if (exGovernment) exclusionDetails += '<li><strong>Government employment</strong> within the family triggers exclusion.</li>';
+        if (exTax) exclusionDetails += '<li>Household contains an active <strong>income or professional tax payer</strong>.</li>';
+        if (exLand) exclusionDetails += '<li>Household owns <strong>agricultural land or assets exceeding maximum limits</strong>.</li>';
+        list.innerHTML = exclusionDetails;
+      } else if (criteriaMet) {
+        badge.innerText = 'ELIGIBLE';
+        badge.className = 'results-badge eligible';
+        title.innerText = 'Your Household Qualifies!';
+        desc.innerText = 'Congratulations! Your family matches the targeted profile for the Ayushman Bharat PMJAY scheme.';
+        list.innerHTML = reasonListHTML + '<li>No exclusion criteria were met, which supports your eligibility profile.</li>';
+      } else {
+        badge.innerText = 'NOT ELIGIBLE';
+        badge.className = 'results-badge excluded';
+        title.innerText = 'Criteria Not Met';
+        desc.innerText = 'Although you do not have any exclusion parameters, your household does not fall under the targeted socio-economic categories.';
+        list.innerHTML = reasonListHTML;
+      }
+
+      document.getElementById('stepResult').classList.add('active');
+    }
+
+    function resetWizard() {
+      currentStep = 1;
+      locationType = 'rural';
+
+      document.getElementById('stateSelect').value = '';
+      document.getElementById('urbanJobSelect').value = '';
+      cardRural?.classList.add('selected');
+      cardUrban?.classList.remove('selected');
+      if (radioRural) radioRural.checked = true;
+      if (radioUrban) radioUrban.checked = false;
+
+      document.getElementById('depD1').checked = false;
+      document.getElementById('depD2').checked = false;
+      document.getElementById('depD4').checked = false;
+      document.getElementById('depD7').checked = false;
+      document.getElementById('exVehicle').checked = false;
+      document.getElementById('exGovernment').checked = false;
+      document.getElementById('exTax').checked = false;
+      document.getElementById('exLand').checked = false;
+
+      document.querySelectorAll('.wizard-step').forEach((step) => step.classList.remove('active'));
+      document.getElementById('step1').classList.add('active');
+
+      stepIndicator.style.display = 'block';
+      wizardFooter.style.display = 'flex';
+      document.getElementById('stepResult').classList.remove('active');
+      hideStateError();
+      updateWizardUI();
+      btnNext.disabled = false;
+    }
+
+    btnNext.disabled = false;
+  </script>
+</SeoLayout>
