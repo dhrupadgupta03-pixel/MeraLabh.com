@@ -6,7 +6,7 @@ interface Props {
   description: string;
   schemas?: string[];
   canonicalUrl?: string;
-  activeNav?: 'home' | 'check';
+  activeNav?: 'home' | 'schemes' | 'check';
   noindex?: boolean;
 }
 
@@ -99,16 +99,17 @@ const websiteSchema = JSON.stringify({
         <div>
           <h4 class="footer-heading">Quick Links</h4>
           <ul class="footer-links">
-            <li class="footer-link"><a href="/">Eligibility Guide</a></li>
+            <li class="footer-link"><a href="/">Ayushman Guide</a></li>
+            <li class="footer-link"><a href="/schemes/">All Schemes</a></li>
             <li class="footer-link"><a href="/check/">Eligibility Tool</a></li>
           </ul>
         </div>
         <div>
-          <h4 class="footer-heading">Popular Sections</h4>
+          <h4 class="footer-heading">Popular Pages</h4>
           <ul class="footer-links">
-            <li class="footer-link"><a href="/#rural-rules">Rural Eligibility Rules</a></li>
-            <li class="footer-link"><a href="/#urban-rules">Urban Occupation List</a></li>
-            <li class="footer-link"><a href="/#faq">PM-JAY FAQs</a></li>
+            <li class="footer-link"><a href="/schemes/">Government Schemes Hub</a></li>
+            <li class="footer-link"><a href="/#rural-rules">Ayushman Eligibility Rules</a></li>
+            <li class="footer-link"><a href="/#faq">Ayushman FAQs</a></li>
             <li class="footer-link"><a href="/check/">Eligibility Tool</a></li>
           </ul>
         </div>

@@ -2,12 +2,14 @@
 import SeoLayout from '../layouts/SeoLayout.astro';
 
 const canonicalUrl = new URL('/check/', Astro.site || 'https://www.meralabh.com').toString();
+const pageTitle = 'Ayushman Card Eligibility Check Online | MeraLabh';
+const pageDescription =
+  'Use our interactive Ayushman Bharat eligibility check tool online. Get instant results based on rural, urban, and exclusion criteria.';
 const pageSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Ayushman Card Eligibility Calculator Online - Check PM-JAY Status',
-  description:
-    'Use our interactive Ayushman Bharat eligibility check tool online. Get instant results based on rural, urban, and exclusion criteria.',
+  name: pageTitle,
+  description: pageDescription,
   applicationCategory: 'GovernmentApplication',
   operatingSystem: 'Web',
   url: canonicalUrl,
@@ -38,8 +40,8 @@ const breadcrumbListSchema = JSON.stringify({
 });
 ---
 <SeoLayout
-  title="Ayushman Card Eligibility Calculator Online - Check PM-JAY Status"
-  description="Use our interactive Ayushman Bharat eligibility check tool online. Get instant results based on rural, urban, and exclusion criteria."
+  title={pageTitle}
+  description={pageDescription}
   canonicalUrl={canonicalUrl}
   schemas={[pageSchema, breadcrumbListSchema]}
   activeNav="check"
@@ -92,7 +94,7 @@ const breadcrumbListSchema = JSON.stringify({
               <span class="radio-card-control" aria-hidden="true"></span>
               <div class="radio-card-content">
                 <span class="radio-card-title">Rural Areas</span>
-                <span class="radio-card-desc">Villages, Gram Panchayats, agricultural zones.</span>
+                <span class="radio-card-desc">For families living in villages or farming areas.</span>
               </div>
               <img
                 src="/check/assets/rural-card-scene.png"
@@ -105,7 +107,7 @@ const breadcrumbListSchema = JSON.stringify({
               <span class="radio-card-control" aria-hidden="true"></span>
               <div class="radio-card-content">
                 <span class="radio-card-title">Urban Areas</span>
-                <span class="radio-card-desc">Cities, municipalities, towns, cantonments.</span>
+                <span class="radio-card-desc">For families living in cities and towns.</span>
               </div>
               <img
                 src="/check/assets/urban-card-scene.png"
@@ -124,16 +126,16 @@ const breadcrumbListSchema = JSON.stringify({
           <label class="form-group checkbox-card" for="depD1">
             <input type="checkbox" id="depD1">
             <span class="checkbox-card-content">
-              <strong class="checkbox-card-title">Temporary House (D1)</strong>
-              <span class="checkbox-card-desc">Household lives in a house with only one room with kucha walls and roof.</span>
+              <strong class="checkbox-card-title">Single-Room Kucha House (D1)</strong>
+              <span class="checkbox-card-desc">You live in a temporary house with kucha walls and a kucha roof.</span>
             </span>
           </label>
 
           <label class="form-group checkbox-card" for="depD2">
             <input type="checkbox" id="depD2">
             <span class="checkbox-card-content">
-              <strong class="checkbox-card-title">No Adult Caregivers (D2)</strong>
-              <span class="checkbox-card-desc">Household has no adult member between the ages of 16 and 59.</span>
+              <strong class="checkbox-card-title">No Working-Age Adults (D2)</strong>
+              <span class="checkbox-card-desc">Your family has no member aged 16 to 59 to support the household.</span>
             </span>
           </label>
 
@@ -141,70 +143,70 @@ const breadcrumbListSchema = JSON.stringify({
             <input type="checkbox" id="depD4">
             <span class="checkbox-card-content">
               <strong class="checkbox-card-title">Disabled Household (D4)</strong>
-              <span class="checkbox-card-desc">Household has a disabled member and no able-bodied adult member.</span>
+              <span class="checkbox-card-desc">You have a disabled family member and no fit adult to support them.</span>
             </span>
           </label>
 
           <label class="form-group checkbox-card" for="depD7">
             <input type="checkbox" id="depD7">
             <span class="checkbox-card-content">
-              <strong class="checkbox-card-title">Landless Casual Labor (D7)</strong>
-              <span class="checkbox-card-desc">Household is landless and earns a major part of its income from manual casual labor.</span>
+              <strong class="checkbox-card-title">Landless Daily-Wage Labor (D7)</strong>
+              <span class="checkbox-card-desc">You do not own land and earn your living through manual daily-wage work.</span>
             </span>
           </label>
         </div>
 
         <div id="urbanQuestions" style="display: none;">
           <div class="form-group">
-            <label class="form-label" for="urbanJobSelect">Select Main Occupation of the Household Breadwinner</label>
+            <label class="form-label" for="urbanJobSelect">Select Main Occupation of the Household Earner</label>
             <select class="select-input" id="urbanJobSelect">
               <option value="" disabled selected>-- Select Occupation --</option>
-              <option value="ragpicker">Ragpicker, Street Sweeper, Sanitation worker</option>
-              <option value="helper">Domestic helper, Cook, Home helper</option>
-              <option value="vendor">Street vendor, Hawker, Vegetable seller, Cobbler</option>
-              <option value="labor">Construction worker, Plumber, Mason, Painter</option>
-              <option value="artisan">Weaver, Handicraft worker, Home tailor</option>
-              <option value="transport">Driver, Conductor, Cart/Rickshaw puller</option>
-              <option value="shop">Delivery boy, Shop helper, Waiter, Peon</option>
-              <option value="other_formal">Formal employee, Salaried professional, Store owner</option>
-              <option value="none">Unemployed, Homemaker</option>
+              <option value="ragpicker">Ragpicker, Sweeper, or Sanitation worker</option>
+              <option value="helper">House help, Maid, or Cook</option>
+              <option value="vendor">Street vendor, Hawker, or Shop helper</option>
+              <option value="labor">Construction worker, Mason, Plumber, or Painter</option>
+              <option value="artisan">Artisan, Tailor, or Handicraft worker</option>
+              <option value="transport">Driver, Rickshaw puller, or Conductor</option>
+              <option value="shop">Delivery worker, Waiter, or Peon</option>
+              <option value="other_formal">Regular office employee, Shop owner, or professional</option>
+              <option value="none">Unemployed or Homemaker</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="wizard-step" id="step3">
-        <label class="form-label" style="margin-bottom: 1.2rem; color: var(--accent-orange);">Check all features owned by your household (Strict Exclusions):</label>
+        <label class="form-label" style="margin-bottom: 1.2rem; color: var(--accent-orange);">Check all features owned by your household (Disqualification Rules):</label>
 
         <label class="form-group checkbox-card" for="exVehicle">
           <input type="checkbox" id="exVehicle">
           <span class="checkbox-card-content">
-            <strong class="checkbox-card-title">Motorized Vehicles</strong>
-            <span class="checkbox-card-desc">Household owns a motorized two-wheeler, three-wheeler, four-wheeler, or commercial vehicle.</span>
+            <strong class="checkbox-card-title">Motorized Vehicle</strong>
+            <span class="checkbox-card-desc">You own a motorcycle, scooter, auto, car, or tractor.</span>
           </span>
         </label>
 
         <label class="form-group checkbox-card" for="exGovernment">
           <input type="checkbox" id="exGovernment">
           <span class="checkbox-card-content">
-            <strong class="checkbox-card-title">Government Employee</strong>
-            <span class="checkbox-card-desc">Any member of the household is a regular or permanent government employee.</span>
+            <strong class="checkbox-card-title">Government Job</strong>
+            <span class="checkbox-card-desc">Someone in your household has a permanent government job.</span>
           </span>
         </label>
 
         <label class="form-group checkbox-card" for="exTax">
           <input type="checkbox" id="exTax">
           <span class="checkbox-card-content">
-            <strong class="checkbox-card-title">Income Tax Payer</strong>
-            <span class="checkbox-card-desc">Any family member is registered as an income tax payer or pays professional tax.</span>
+            <strong class="checkbox-card-title">Tax Payer</strong>
+            <span class="checkbox-card-desc">Someone in your family pays income tax or professional tax.</span>
           </span>
         </label>
 
         <label class="form-group checkbox-card" for="exLand">
           <input type="checkbox" id="exLand">
           <span class="checkbox-card-content">
-            <strong class="checkbox-card-title">High Landholding</strong>
-            <span class="checkbox-card-desc">Owns more than 5 acres of irrigated land or holds a KCC above Rs 50,000.</span>
+            <strong class="checkbox-card-title">Farmland or Card Limit</strong>
+            <span class="checkbox-card-desc">You own over 5 acres of irrigated land, or have a Kisan Credit Card (KCC) limit above ₹50,000.</span>
           </span>
         </label>
       </div>
@@ -216,7 +218,7 @@ const breadcrumbListSchema = JSON.stringify({
           <p class="results-description" id="resultDesc">Based on your inputs, your household meets the criteria for PMJAY health card coverage.</p>
 
           <div class="results-reasons">
-            <h4 class="results-reasons-title" id="reasonsHeader">Evaluation Breakdown:</h4>
+            <h4 class="results-reasons-title" id="reasonsHeader">Here is why:</h4>
             <ul class="results-reasons-list" id="reasonsList"></ul>
           </div>
 
@@ -247,23 +249,23 @@ const breadcrumbListSchema = JSON.stringify({
         </thead>
         <tbody>
           <tr>
-            <td><strong>Focus Area</strong></td>
-            <td>Socio-economic deprivation categories.</td>
-            <td>Informal and unorganized occupational profiles.</td>
+            <td><strong>What is Checked</strong></td>
+            <td>Your family's living conditions and housing.</td>
+            <td>The type of work the main earner does.</td>
           </tr>
           <tr>
-            <td><strong>Primary Target</strong></td>
-            <td>Landless laborers, kucha house occupants, women-led or disabled households.</td>
-            <td>Daily wage workers, domestic helpers, street hawkers.</td>
+            <td><strong>Who is Eligible</strong></td>
+            <td>Families living in single-room kucha houses, women-led households, or daily-wage workers.</td>
+            <td>Maids, rickshaw pullers, street vendors, and helpers.</td>
           </tr>
           <tr>
-            <td><strong>Key Exclusion</strong></td>
-            <td>Owns motorized vehicles, pays tax, regular government job.</td>
-            <td>Formal salaried employment, pays tax, high-value land or assets.</td>
+            <td><strong>Who is Disqualified</strong></td>
+            <td>Families owning a vehicle, paying income tax, or having a government job.</td>
+            <td>Families with regular salaries, paying tax, or owning significant assets.</td>
           </tr>
           <tr>
             <td><strong>Benefits</strong></td>
-            <td colspan="2" style="text-align: center; background-color: #fafafa; font-weight: 600; color: var(--primary-blue);">Rs 5 lakh annual cashless treatment at any empaneled hospital.</td>
+            <td colspan="2" style="text-align: center; background-color: #fafafa; font-weight: 600; color: var(--primary-blue);">Rs 5 lakh annual cashless treatment at any registered hospital.</td>
           </tr>
         </tbody>
       </table>
@@ -415,22 +417,22 @@ const breadcrumbListSchema = JSON.stringify({
 
         if (depD1 || depD2 || depD4 || depD7) {
           criteriaMet = true;
-          if (depD1) reasonListHTML += '<li>Family satisfies deprivation criteria D1 (kucha temporary wall and roof).</li>';
-          if (depD2) reasonListHTML += '<li>Family satisfies deprivation criteria D2 (no adult between 16 and 59).</li>';
-          if (depD4) reasonListHTML += '<li>Family satisfies deprivation criteria D4 (disabled member present).</li>';
-          if (depD7) reasonListHTML += '<li>Family satisfies deprivation criteria D7 (landless casual labor).</li>';
+          if (depD1) reasonListHTML += '<li>Your family lives in a temporary, single-room house (kucha walls and roof).</li>';
+          if (depD2) reasonListHTML += '<li>Your family has no working-age members between 16 and 59.</li>';
+          if (depD4) reasonListHTML += '<li>Your family has a disabled member and no fit adult to support them.</li>';
+          if (depD7) reasonListHTML += '<li>Your family earns their living through daily manual labor and has no land.</li>';
         } else {
-          reasonListHTML += '<li>No rural deprivation parameters were checked.</li>';
+          reasonListHTML += '<li>None of the eligible rural conditions were checked.</li>';
         }
       } else {
         const job = document.getElementById('urbanJobSelect').value;
         if (job !== 'other_formal' && job !== 'none') {
           criteriaMet = true;
-          reasonListHTML += `<li>Household breadwinner falls under the eligible informal job category: <strong>${job.toUpperCase()}</strong>.</li>`;
+          reasonListHTML += `<li>The main earner works in an eligible daily-wage or informal job: <strong>${job.toUpperCase()}</strong>.</li>`;
         } else if (job === 'other_formal') {
-          reasonListHTML += '<li>Formal corporate jobs and salaried professionals are not eligible for PMJAY.</li>';
+          reasonListHTML += '<li>Regular office employees, shop owners, and salaried professionals do not qualify for this scheme.</li>';
         } else {
-          reasonListHTML += '<li>Unemployed households without informal occupational profiles do not meet urban eligibility.</li>';
+          reasonListHTML += '<li>Unemployed households without informal jobs do not qualify under city rules.</li>';
         }
       }
 
@@ -446,26 +448,26 @@ const breadcrumbListSchema = JSON.stringify({
       if (hasExclusions) {
         badge.innerText = 'NOT ELIGIBLE';
         badge.className = 'results-badge excluded';
-        title.innerText = 'Exclusion Parameters Met';
-        desc.innerText = 'Unfortunately, your household has assets or conditions that legally disqualify you from the Ayushman Bharat PM-JAY scheme.';
+        title.innerText = 'Disqualification Rules Met';
+        desc.innerText = 'Based on your answers, your family owns assets or meets conditions that disqualify you from the Ayushman Bharat PM-JAY scheme.';
 
-        let exclusionDetails = '<li>Household owns assets or has family conditions that exclude eligibility:</li>';
-        if (exVehicle) exclusionDetails += '<li><strong>Ownership of motorized vehicle(s)</strong> triggers exclusion rules.</li>';
-        if (exGovernment) exclusionDetails += '<li><strong>Government employment</strong> within the family triggers exclusion.</li>';
-        if (exTax) exclusionDetails += '<li>Household contains an active <strong>income or professional tax payer</strong>.</li>';
-        if (exLand) exclusionDetails += '<li>Household owns <strong>agricultural land or assets exceeding maximum limits</strong>.</li>';
+        let exclusionDetails = '<li>Your household meets one or more disqualifying conditions:</li>';
+        if (exVehicle) exclusionDetails += '<li><strong>Owning a motorized vehicle</strong> (car, motorcycle, auto, etc.) makes you ineligible.</li>';
+        if (exGovernment) exclusionDetails += '<li><strong>Government employment</strong> in the family disqualifies the household.</li>';
+        if (exTax) exclusionDetails += '<li>Having an active <strong>income or professional tax payer</strong> in the family disqualifies you.</li>';
+        if (exLand) exclusionDetails += '<li><strong>Farmland ownership or card limits</strong> exceed the allowed maximums.</li>';
         list.innerHTML = exclusionDetails;
       } else if (criteriaMet) {
         badge.innerText = 'ELIGIBLE';
         badge.className = 'results-badge eligible';
         title.innerText = 'Your Household Qualifies!';
-        desc.innerText = 'Congratulations! Your family matches the targeted profile for the Ayushman Bharat PMJAY scheme.';
-        list.innerHTML = reasonListHTML + '<li>No exclusion criteria were met, which supports your eligibility profile.</li>';
+        desc.innerText = 'Congratulations! Your family matches the profile for the Ayushman Bharat PM-JAY scheme.';
+        list.innerHTML = reasonListHTML + '<li>No disqualifying conditions (like vehicle ownership or tax status) were found.</li>';
       } else {
         badge.innerText = 'NOT ELIGIBLE';
         badge.className = 'results-badge excluded';
         title.innerText = 'Criteria Not Met';
-        desc.innerText = 'Although you do not have any exclusion parameters, your household does not fall under the targeted socio-economic categories.';
+        desc.innerText = 'Even though you don\'t meet any disqualification rules, your family doesn\'t fall under the eligible rural or urban categories.';
         list.innerHTML = reasonListHTML;
       }
 
