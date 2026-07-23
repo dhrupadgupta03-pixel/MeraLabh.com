@@ -41,6 +41,7 @@ const websiteSchema = JSON.stringify({
   },
   inLanguage: 'en',
 });
+const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +76,18 @@ const websiteSchema = JSON.stringify({
   {schemas.map((schema) => (
     <script type="application/ld+json" set:html={schema} />
   ))}
+
+  {gaId && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+      <script is:inline set:html={`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${gaId}');
+      `} />
+    </>
+  )}
 </head>
 <body>
   <header class="ml-header" id="header">
@@ -127,6 +140,11 @@ const websiteSchema = JSON.stringify({
 
       <div class="footer-bottom">
         <p class="footer-disclaimer"><strong>Disclaimer:</strong> MeraLabh is an independent informational website and is not affiliated with the National Health Authority, the Ministry of Health and Family Welfare, or any state or central government. The official portal is located at pmjay.gov.in.</p>
+        <div style="margin: 0.75rem 0; display: flex; gap: 1.5rem; justify-content: center; font-size: 0.88rem; flex-wrap: wrap;">
+          <a href="/about/" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">About Us</a>
+          <a href="/privacy/" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">Privacy Policy</a>
+          <a href="/disclaimer/" style="color: rgba(255, 255, 255, 0.8); text-decoration: underline;">Disclaimer Notice</a>
+        </div>
         <p class="footer-copyright">© 2026 MeraLabh.com. All rights reserved.</p>
       </div>
     </div>

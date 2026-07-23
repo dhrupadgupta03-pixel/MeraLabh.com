@@ -1,0 +1,44 @@
+---
+import SeoLayout from '../layouts/SeoLayout.astro';
+
+const canonicalUrl = new URL('/privacy/', Astro.site || 'https://www.meralabh.com').toString();
+const pageTitle = 'Privacy Policy | MeraLabh';
+const pageDescription = 'Learn about MeraLabh privacy practices, data handling, cookies, and user security policies.';
+---
+<SeoLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+>
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">Privacy Policy</h1>
+      <p class="hero-description">Your privacy and data security are fundamental to our mission at MeraLabh.</p>
+    </div>
+  </section>
+
+  <div class="main-wrapper" style="max-width: 900px; margin: 3rem auto;">
+    <main class="content-area">
+      <section class="editorial-section">
+        <h2>1. Information We Collect</h2>
+        <p>MeraLabh is an informational resource portal. We do not require users to register or create accounts to access scheme guides or use our interactive eligibility checker tools.</p>
+        <p>Our online eligibility tool runs entirely in your web browser. Any responses you select (such as household status or location) are evaluated locally on your device and are never sent or stored on our servers.</p>
+      </section>
+
+      <section class="editorial-section">
+        <h2>2. Cookies and Analytics</h2>
+        <p>We may use standard anonymized web analytics tools (such as Google Analytics) to understand aggregate website traffic, page view performance, and user navigation patterns. These analytics tools use anonymous identifiers and cookies that do not collect personal identification numbers, phone numbers, or private credentials.</p>
+      </section>
+
+      <section class="editorial-section">
+        <h2>3. External Links</h2>
+        <p>Our guides contain links to official Indian government portals (such as pmjay.gov.in) and public helpdesk resources. MeraLabh is not responsible for the privacy practices or content of third-party websites.</p>
+      </section>
+
+      <section class="editorial-section">
+        <h2>4. Contact Us</h2>
+        <p>If you have questions regarding this Privacy Policy or data privacy on MeraLabh, please contact our team at <a href="mailto:support@meralabh.com" style="color: var(--primary-blue); font-weight: 600;">support@meralabh.com</a>.</p>
+      </section>
+    </main>
+  </div>
+</SeoLayout>

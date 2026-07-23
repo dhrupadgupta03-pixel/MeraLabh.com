@@ -1,0 +1,39 @@
+---
+import SeoLayout from '../layouts/SeoLayout.astro';
+
+const canonicalUrl = new URL('/disclaimer/', Astro.site || 'https://www.meralabh.com').toString();
+const pageTitle = 'Disclaimer & Non-Affiliation | MeraLabh';
+const pageDescription = 'MeraLabh is an independent public information guide and is not affiliated with the National Health Authority or Government of India.';
+---
+<SeoLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+>
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">Disclaimer & Non-Affiliation Notice</h1>
+      <p class="hero-description">Important disclosure regarding MeraLabh's independent status and official government resources.</p>
+    </div>
+  </section>
+
+  <div class="main-wrapper" style="max-width: 900px; margin: 3rem auto;">
+    <main class="content-area">
+      <section class="editorial-section">
+        <h2>1. Independent Information Portal</h2>
+        <p><strong>MeraLabh (meralabh.com)</strong> is an independent, private educational and informational portal. We are <strong>not affiliated, associated, authorized, endorsed by, or in any way officially connected</strong> with the National Health Authority (NHA), the Ministry of Health and Family Welfare (MoHFW), or any Central or State Government department in India.</p>
+      </section>
+
+      <section class="editorial-section">
+        <h2>2. Official Government Resources</h2>
+        <p>The official portal for the Pradhan Mantri Jan Arogya Yojana (PM-JAY) is maintained exclusively by the Government of India at <a href="https://pmjay.gov.in" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); font-weight: 700; text-decoration: underline;">pmjay.gov.in</a>.</p>
+        <p>For official beneficiary status check, card downloads, or hospital listings, citizens should always use the official government portal or contact the 24/7 national helpline at <strong>14555</strong>.</p>
+      </section>
+
+      <section class="editorial-section">
+        <h2>3. Accuracy & Educational Purpose</h2>
+        <p>While our team makes every effort to ensure that scheme guidelines, eligibility conditions, and required document lists are accurate and up to date based on publicly released government notifications, government policies may change over time. MeraLabh does not issue Ayushman Cards or guarantee official scheme enrollment.</p>
+      </section>
+    </main>
+  </div>
+</SeoLayout>

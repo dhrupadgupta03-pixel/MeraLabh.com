@@ -1,0 +1,43 @@
+---
+import SeoLayout from '../layouts/SeoLayout.astro';
+
+const canonicalUrl = new URL('/about/', Astro.site || 'https://www.meralabh.com').toString();
+const pageTitle = 'About MeraLabh | Public Welfare Information Guide';
+const pageDescription = 'Learn about MeraLabh mission to simplify Indian government welfare schemes and empower everyday citizens with clear eligibility guides.';
+---
+<SeoLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+>
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">About MeraLabh</h1>
+      <p class="hero-description">Simplifying Indian government benefits and welfare schemes for every household.</p>
+    </div>
+  </section>
+
+  <div class="main-wrapper" style="max-width: 900px; margin: 3rem auto;">
+    <main class="content-area">
+      <section class="editorial-section">
+        <h2>Our Mission</h2>
+        <p>Millions of Indian households qualify for central and state government healthcare, housing, and social welfare programs, but often struggle to understand complex eligibility guidelines and application procedures.</p>
+        <p><strong>MeraLabh</strong> was created to bridge this information gap. We break down official government policy documents into simple, easy-to-understand guides, interactive eligibility pre-check tools, and clear document checklists.</p>
+      </section>
+
+      <section class="editorial-section">
+        <h2>Editorial Principles & Standards</h2>
+        <ul style="margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; color: var(--text-secondary);">
+          <li><strong>Fact-Checked Information:</strong> All eligibility criteria and document lists are verified against official government releases.</li>
+          <li><strong>No Hidden Costs:</strong> MeraLabh is 100% free to access. We never charge citizens for viewing scheme guides or using pre-check calculators.</li>
+          <li><strong>Clear Disclaimers:</strong> We maintain complete transparency regarding our status as an independent informational website.</li>
+        </ul>
+      </section>
+
+      <section class="editorial-section">
+        <h2>Get in Touch</h2>
+        <p>Have feedback or suggestions for our welfare guides? Contact our editorial team at <a href="mailto:support@meralabh.com" style="color: var(--primary-blue); font-weight: 600;">support@meralabh.com</a>.</p>
+      </section>
+    </main>
+  </div>
+</SeoLayout>
