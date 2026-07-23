@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" rx="32" fill="#F6F9FC"/>
+  <rect x="48" y="48" width="1104" height="534" rx="28" fill="url(#bg)"/>
+  <circle cx="1022" cy="138" r="126" fill="#A7F3D0" fill-opacity="0.42"/>
+  <circle cx="194" cy="516" r="154" fill="#BFDBFE" fill-opacity="0.55"/>
+  <rect x="100" y="108" width="152" height="152" rx="34" fill="#0E4EA2"/>
+  <path d="M182.072 202.57a89.663 89.663 0 0 0-34.028 8.237l28.879-78.422c0.842-2.291 2.275-3.667 4.005-3.667h34.617c1.729 0 3.163 1.376 4.005 3.667l28.878 78.422s-13.809-8.356-34.028-8.356l-12.863-39.177c-0.472-2.054-1.91-3.392-3.465-3.392-1.554 0-2.994 1.338-3.466 3.274l-12.534 39.414Z" fill="#fff"/>
+  <text x="100" y="336" fill="#FFFFFF" font-family="Outfit, Arial, sans-serif" font-size="68" font-weight="700">
+    MeraLabh
+  </text>
+  <text x="100" y="412" fill="#D9E7FF" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="500">
+    Ayushman Bharat eligibility guides and PM-JAY help
+  </text>
+  <text x="100" y="484" fill="#FFFFFF" font-family="Outfit, Arial, sans-serif" font-size="50" font-weight="600">
+    Clear rules. Fast checks. Better discovery.
+  </text>
+  <rect x="100" y="516" width="290" height="52" rx="26" fill="#F59E0B"/>
+  <text x="130" y="551" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="700">
+    www.meralabh.com
+  </text>
+  <defs>
+    <linearGradient id="bg" x1="68" y1="96" x2="1114" y2="582" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E4EA2"/>
+      <stop offset="1" stop-color="#0B7A75"/>
+    </linearGradient>
+  </defs>
+</svg>

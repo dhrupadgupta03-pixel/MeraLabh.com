@@ -4,8 +4,7 @@ import '../styles/eligibility.css';
 interface Props {
   title: string;
   description: string;
-  schemaMarkup?: string;
-  breadcrumbListSchema?: string;
+  schemas?: string[];
   canonicalUrl?: string;
   activeNav?: 'home' | 'check';
   noindex?: boolean;
@@ -14,8 +13,7 @@ interface Props {
 const {
   title,
   description,
-  schemaMarkup,
-  breadcrumbListSchema,
+  schemas = [],
   canonicalUrl,
   activeNav,
   noindex = false,
@@ -23,6 +21,26 @@ const {
 
 const siteUrl = Astro.site?.toString() ?? 'https://www.meralabh.com';
 const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).toString();
+const defaultSocialImage = new URL('/og/meralabh-share.svg', siteUrl).toString();
+const organizationSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}#organization`,
+  name: 'MeraLabh',
+  url: siteUrl,
+  logo: new URL('/favicon.svg', siteUrl).toString(),
+});
+const websiteSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}#website`,
+  name: 'MeraLabh',
+  url: siteUrl,
+  publisher: {
+    '@id': `${siteUrl}#organization`,
+  },
+  inLanguage: 'en',
+});
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +54,8 @@ const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#0e4ea2">
 
   <meta property="og:type" content="website">
@@ -43,16 +63,18 @@ const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl
   <meta property="og:description" content={description}>
   <meta property="og:url" content={resolvedCanonicalUrl}>
   <meta property="og:site_name" content="MeraLabh">
+  <meta property="og:image" content={defaultSocialImage}>
+  <meta property="og:image:alt" content="MeraLabh guide for Ayushman Bharat and government scheme benefits">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
   <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={defaultSocialImage}>
 
-  {schemaMarkup && (
-    <script type="application/ld+json" set:html={schemaMarkup} />
-  )}
-  {breadcrumbListSchema && (
-    <script type="application/ld+json" set:html={breadcrumbListSchema} />
-  )}
+  <script type="application/ld+json" set:html={organizationSchema} />
+  <script type="application/ld+json" set:html={websiteSchema} />
+  {schemas.map((schema) => (
+    <script type="application/ld+json" set:html={schema} />
+  ))}
 </head>
 <body>
   <header class="ml-header" id="header">
@@ -82,12 +104,12 @@ const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl
           </ul>
         </div>
         <div>
-          <h4 class="footer-heading">Other Schemes</h4>
+          <h4 class="footer-heading">Popular Sections</h4>
           <ul class="footer-links">
-            <li class="footer-link"><a href="#">Jan Dhan Yojana</a></li>
-            <li class="footer-link"><a href="#">PM Kisan Eligibility</a></li>
-            <li class="footer-link"><a href="#">ABHA Card Registration</a></li>
-            <li class="footer-link"><a href="#">Awas Yojana Rules</a></li>
+            <li class="footer-link"><a href="/#rural-rules">Rural Eligibility Rules</a></li>
+            <li class="footer-link"><a href="/#urban-rules">Urban Occupation List</a></li>
+            <li class="footer-link"><a href="/#faq">PM-JAY FAQs</a></li>
+            <li class="footer-link"><a href="/check/">Eligibility Tool</a></li>
           </ul>
         </div>
         <div>

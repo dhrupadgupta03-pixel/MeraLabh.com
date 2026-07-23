@@ -43,6 +43,25 @@ const pageSchema = JSON.stringify({
   },
 });
 
+const breadcrumbSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: canonicalUrl,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Ayushman Bharat Eligibility Rules 2026',
+      item: canonicalUrl,
+    },
+  ],
+});
+
 const faqSchema = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -60,8 +79,7 @@ const faqSchema = JSON.stringify({
   title="Ayushman Card Eligibility Criteria 2026 - Who is Eligible for PM-JAY?"
   description="Understand the detailed eligibility criteria for the Ayushman Bharat PMJAY scheme. Discover who is eligible under rural and urban rules, exclusions, and required documents."
   canonicalUrl={canonicalUrl}
-  schemaMarkup={pageSchema}
-  breadcrumbListSchema={faqSchema}
+  schemas={[pageSchema, breadcrumbSchema, faqSchema]}
   activeNav="home"
 >
   <section class="hero-section">
