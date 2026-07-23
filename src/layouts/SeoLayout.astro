@@ -60,13 +60,6 @@ const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl
       <a href="/" class="ml-logo">
         <span>MeraLabh</span><span class="ml-logo-dot">.</span>
       </a>
-      <nav>
-        <ul class="ml-nav">
-          <li class="ml-nav-item ml-nav-item-primary"><a href="/" class:list={['ml-nav-link', activeNav === 'home' && 'active']}>Scheme Eligibility</a></li>
-          <li><a href="/check/" class:list={['ml-nav-link', activeNav === 'check' && 'active']}>Online Check</a></li>
-          <li><a href="/check/" class="ml-header-cta">Check Eligibility</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
